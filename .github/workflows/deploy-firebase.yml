@@ -8,6 +8,7 @@ on:
 
 jobs:
   test:
+    runs-on: ubuntu-latest
     steps:
       - run: echo ${{ secrets[join('firebase_project_', github['ref'])] }}
       - run: echo ${{ join('firebase_project_', github['ref']) }}
