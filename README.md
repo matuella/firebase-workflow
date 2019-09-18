@@ -1,1 +1,1 @@
-# Multi-stage Firebase + Github Actions Deploy Workflow
+# Multi-stage Firebase Deploy + Github Workflow
