@@ -24,21 +24,17 @@ jobs:
   #   needs: build
   #   steps:
       - name: Deploying to Production
-        uses: w9jds/firebase-action@v1.0.1
+        uses: matuella/firebase-deploy@releases/v1
         if: success() && github.ref == 'refs/heads/master'
         with:
-          args: deploy
-        env:
-          PROJECT_ID: fir-actions
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_PROD }}
+          projectId: fir-actions
+          firebaseToken: ${{ secrets.FIREBASE_TOKEN_PROD }}
       - name: Deploying to Development
-        uses: w9jds/firebase-action@v1.0.1
+        uses: matuella/firebase-deploy@releases/v1
         if: success() && github.ref == 'refs/heads/development'
-        with:
-          args: deploy
         env:
-          PROJECT_ID: fir-actions-dev
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_DEV }}
+          projectId: fir-actions-dev
+          firebaseToken: ${{ secrets.FIREBASE_TOKEN_DEV }}
 
           ## Joins the current branch name + prefix so that we can get the variables relative to the branch
           # PROJECT_ID: ${{ secrets[join('firebase_project_', github['ref'])] }}
