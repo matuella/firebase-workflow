@@ -7,12 +7,14 @@ on:
       - development
 
 jobs:
-  - run: echo ${{ secrets[join('firebase_project_', github['ref'])] }}
-  - run: echo ${{ join('firebase_project_', github['ref']) }}
-  - run: echo ${{ github['ref'] }}
-  - run: echo ${{ github.ref }}
-  - run: echo ${{ github.ref == 'master' }}
-  - run: echo ${{ github.ref == 'development' }}
+  test:
+    steps:
+      - run: echo ${{ secrets[join('firebase_project_', github['ref'])] }}
+      - run: echo ${{ join('firebase_project_', github['ref']) }}
+      - run: echo ${{ github['ref'] }}
+      - run: echo ${{ github.ref }}
+      - run: echo ${{ github.ref == 'master' }}
+      - run: echo ${{ github.ref == 'development' }}
   # build:
   #   runs-on: ubuntu-latest
   #   steps:
