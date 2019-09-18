@@ -24,10 +24,20 @@ jobs:
     needs: build
     steps:
       - uses: w9jds/firebase-action@v1.0.1
-        if: success()
+        if: success() && github.ref == 'master'
         with:
           args: deploy
         env:
+          PROJECT_ID: fir-actions
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_PROD }}
+      - uses: w9jds/firebase-action@v1.0.1
+        if: success() && github.ref == 'development'
+        with:
+          args: deploy
+        env:
+          PROJECT_ID: fir-actions-dev
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_DEV }}
+
           ## Joins the current branch name + prefix so that we can get the variables relative to the branch
-          PROJECT_ID: ${{ secrets[join('firebase_project_', github['ref'])] }}
-          FIREBASE_TOKEN: ${{ secrets[join('firebase_key_', github['ref'])] }}
+          # PROJECT_ID: ${{ secrets[join('firebase_project_', github['ref'])] }}
+          # FIREBASE_TOKEN: ${{ secrets[join('firebase_key_', github['ref'])] }}
